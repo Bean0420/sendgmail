@@ -61,5 +61,5 @@ dependencies
 printf "\e[0;32m Sendmail + Gmail configured \n \e[0m";
 printf "\e[0;32m To send email start Sendmail (service sendmail start) and use: \n \e[0m";
 printf '\e[1;77m echo "message" | mail -s "subject" send-to@domain.com \n';
-printf '\e[1;31m Warning: to send emails  with google you need to set up "Less secure apps" \n \e[0m';
+printf '\e[1;31m Warning: to send emails with Gmail you need to set up "Less secure apps" \n \e[0m';
 printf "\e[1;31m Visit: https://myaccount.google.com/lesssecureapps\n \e[0m"
