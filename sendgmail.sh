@@ -2,7 +2,7 @@
 
 checkroot() {
 if [[ "$(id -u)" -ne 0 ]]; then
-     printf "Run this program as root!\n"
+     printf "\e[1;77m Please, run this program as root!\n \e[0m"
      exit 1
 fi
 }
@@ -14,7 +14,7 @@ read -p "Config Gmail account? [y/n]" gmail;
     functiongmail
   fi
 else
-printf "Installing sendmail...\n";
+printf "\e[1;32m Installing sendmail, please wait...\n \e[0m";
 apt-get update 1> /dev/null &
 wait $!
 apt-get install -y sendmail 1> /dev/null &
@@ -23,10 +23,12 @@ functiongmail
 fi
 }
 functiongmail() {
+printf "\e[1;77m";
 read -p "Insert your gmail address: " address
 read -s -p "Insert your password (to create hash): " password
 printf "\n";
 read -p "Insert email username: " username
+printf "\e[0m";
 if [[ -e "/etc/mail/authinfo" ]]; then
 echo ""
 else
@@ -41,7 +43,7 @@ configmail
 configmail() {
 smtp=$(grep 'smtp.gmail.com' /etc/mail/sendmail.mc)
 if [[ $smtp == "" ]]; then
-printf "Configuring /etc/mail/sendmail.mc\n";
+printf "\e[1;32m Configuring /etc/mail/sendmail.mc\n \e[0m";
 sed -i "/MAILER_DEFINITIONS/ i define(\`SMART_HOST',\`[smtp.gmail.com]')dnl" /etc/mail/sendmail.mc
 sed -i "/MAILER_DEFINITIONS/ i define(\`RELAY_MAILER_ARGS', \`TCP \$h 587')dnl" /etc/mail/sendmail.mc
 sed -i "/MAILER_DEFINITIONS/ i define(\`ESMTP_MAILER_ARGS', \`TCP \$h 587')dnl" /etc/mail/sendmail.mc
@@ -56,7 +58,8 @@ fi
 }
 checkroot
 dependencies
-printf "Sendmail + Gmail account configured \n";
-printf "To Send email start Sendmail (service sendmail start) and use: \n";
-printf 'echo "message" | mail -s "subject" send-to@domain.com \n';
-
+printf "\e[0;32m Sendmail + Gmail configured \n \e[0m";
+printf "\e[0;32m To send email start Sendmail (service sendmail start) and use: \n \e[0m";
+printf '\e[1;77m echo "message" | mail -s "subject" send-to@domain.com \n';
+printf '\e[1;31m Warning: to send emails  with google you need to set up "Less secure apps" \n \e[0m';
+printf "\e[1;31m Visit: https://myaccount.google.com/lesssecureapps\n \e[0m"
