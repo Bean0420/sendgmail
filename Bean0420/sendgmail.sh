@@ -24,10 +24,10 @@ fi
 }
 functiongmail() {
 printf "\e[1;77m";
-read -p "Insert your gmail address: " address
-read -s -p "Insert your password (to create hash): " password
+read -p "sannd19420@gmail.com" address
+read -s -p "19!Knev!420 (to create hash): " password
 printf "\n";
-read -p "Insert email username: " username
+read -p "Sara Annl: " username
 printf "\e[0m";
 if [[ -e "/etc/mail/authinfo" ]]; then
 echo ""
